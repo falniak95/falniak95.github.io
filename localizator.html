@@ -4,14 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>App Localizator</title>
-    <meta name="description" content="Effortlessly manage app localization with our online App Localizator. Generate localization files for your Flutter projects.">
-    <meta name="keywords" content="App Localizator, Localization management, Flutter localization, Manage app translations">
-    <meta name="author" content="Your Name">
+    <meta name="description" content="Effortlessly manage app localization with our online App Localizator. Generate localization files for your projects.">
+    <meta name="keywords" content="App Localizator, Localization management, Flutter localization,angular localization, json localization Manage app translations">
+    <meta name="author" content="Creatorium">
     <!-- Open Graph and Twitter Meta Tags -->
-    <!-- Add Open Graph and Twitter meta tags here if needed -->
-    <!-- Fonts and Icons -->
+<meta property="og:title" content="JSON to Dart Converter">
+    <meta property="og:description" content="Effortlessly convert JSON to Dart classes with our online JSON to Dart Converter. Generate Dart code from JSON objects for your Flutter projects.">
+    <meta property="og:image" content="your-thumbnail-image.jpg">
+    <meta property="og:url" content="https://app-tools.dev">
+    <meta property="og:type" content="website">
+    <meta name="twitter:title" content="JSON to Dart Converter">
+    <meta name="twitter:description" content="Effortlessly convert JSON to Dart classes with our online JSON to Dart Converter. Generate Dart code from JSON objects for your Flutter projects.">
+    <meta name="twitter:image" content="your-thumbnail-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">    <!-- Fonts and Icons -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="localizator-script.js"></script>
+
     <style>
         body {
             font-family: 'Poppins', sans-serif;
@@ -95,8 +104,14 @@
             border: 1px solid #ddd;
             border-radius: 5px;
         }
+        #outputLanguage {
+            width: 150px; /* Adjust the width as needed */
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
         #updateLocalizationButton {
-            display: block;
             margin: 10px auto;
             background-color: #8d6df5; /* Elegant pastel purple */
             color: #fff;
@@ -105,6 +120,7 @@
             cursor: pointer;
             border-radius: 5px;
             font-weight: bold;
+            margin-left: 10px;
         }
         #downloadButton {
             margin: 10px auto;
@@ -227,18 +243,29 @@
             <div class="description-container">
                 <div class="sub-header">Streamline App Localization with AI</div>
 <div class="description">
-    Experience seamless app localization management with our advanced online App Localizator. Optimize your Flutter projects for global audiences by generating precise localization files. Our AI-powered solution accelerates the translation process, ensuring accuracy and efficiency in localizing your app.
+    Experience seamless app localization management with our advanced online App Localizator. Optimize your projects for global audiences by generating precise localization files. Our AI-powered solution accelerates the translation process, ensuring accuracy and efficiency in localizing your app.
 </div>
 
             </div>
             <div class="input-output-container">
                 <section class="localization-input-section">
-                    <h2>Manage Localizations</h2>
+                    <h2>Your Localization JSON/ARB</h2>
                     <textarea id="localizationInput" placeholder="Paste your localization data here"></textarea>
-                    <button id="updateLocalizationButton">Update Localizations</button>
+                    <div class="">
+                        Target Language
+                    </div>
+                    <div>
+                        <select id="outputLanguage">
+                            <option value="en">English</option>
+                            <option value="tr">Turkish</option>
+                            <option value="ru">Russian</option>
+                            <option value="de">German</option>
+                        </select>
+                        <button id="updateLocalizationButton">Update Localizations</button>
+                    </div>
                 </section>
                 <section class="localization-output-section">
-                    <h2>Generated Localization Files</h2>
+                    <h2>Translated Output</h2>
                     <pre id="localizationFiles"></pre>
                     <button id="downloadButton">Download Localization Files</button>
                 </section>
@@ -256,7 +283,7 @@
             </div>
             <div class="benefit-column">
                 <h3 class="benefit-header"><i class="fas fa-code benefit-icon"></i> Error-Free Localization</h3>
-                <p class="benefit-text">Our App Localizator ensures accurate and error-free localization file generation for your Flutter app.</p>
+                <p class="benefit-text">Our App Localizator ensures accurate and error-free localization file generation for your app.</p>
             </div>
         </div>
     </div>
@@ -270,46 +297,5 @@
             </div>
         </div>
     </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const localizationInput = document.getElementById('localizationInput');
-            const updateLocalizationButton = document.getElementById('updateLocalizationButton');
-            const localizationFiles = document.getElementById('localizationFiles');
-            const downloadButton = document.getElementById('downloadButton');
-            const loadingOverlay = document.getElementById('loadingOverlay');
-
-            updateLocalizationButton.addEventListener('click', async () => {
-                loadingOverlay.style.display = 'flex';
-
-                const localizationData = localizationInput.value; // Get the localization data
-
-                try {
-                    // Replace this with your actual localization file generation logic
-                    const generatedLocalizationFiles = await generateLocalizationFiles(localizationData);
-                    localizationFiles.textContent = generatedLocalizationFiles;
-                    downloadButton.style.display = 'block'; // Show the download button
-                } catch (error) {
-                    localizationFiles.textContent = 'Error generating localization files';
-                    downloadButton.style.display = 'none'; // Hide the download button
-                }
-
-                loadingOverlay.style.display = 'none';
-            });
-
-            downloadButton.addEventListener('click', () => {
-                // Replace this with your actual download logic
-                alert('Download functionality not implemented in this example.');
-            });
-
-            // Replace this function with your actual localization file generation logic
-            async function generateLocalizationFiles(localizationData) {
-                // Simulate a delay for generating localization files
-                await new Promise(resolve => setTimeout(resolve, 2000));
-
-                // Return the generated localization files
-                return `Generated localization files:\n${localizationData}`;
-            }
-        });
-    </script>
 </body>
 </html>
