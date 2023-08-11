@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON to Dart Converter</title>
+    <meta name="description" content="Effortlessly convert JSON to Dart classes with our online JSON to Dart Converter. Generate Dart code from JSON objects for your Flutter projects.">
+    <meta name="keywords" content="JSON to Dart, Dart class generator, JSON to Dart code, Flutter Dart classes">
+    <meta name="author" content="Your Name">
+    <!-- Open Graph and Twitter Meta Tags -->
+    <meta property="og:title" content="JSON to Dart Converter">
+    <meta property="og:description" content="Effortlessly convert JSON to Dart classes with our online JSON to Dart Converter. Generate Dart code from JSON objects for your Flutter projects.">
+    <meta property="og:image" content="your-thumbnail-image.jpg">
+    <meta property="og:url" content="https://www.yourwebsite.com">
+    <meta property="og:type" content="website">
+    <meta name="twitter:title" content="JSON to Dart Converter">
+    <meta name="twitter:description" content="Effortlessly convert JSON to Dart classes with our online JSON to Dart Converter. Generate Dart code from JSON objects for your Flutter projects.">
+    <meta name="twitter:image" content="your-thumbnail-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Fonts and Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        header {
+            background-color: #8d6df5; /* Elegant pastel purple */
+            color: #fff;
+            text-align: left;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar {
+            display: flex;
+            gap: 20px;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            color: #ddd;
+        }
+        .container {
+            max-width: 1200px; /* Adjust container width as needed */
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .content-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .description-container {
+            flex-basis: 100%;
+        }
+        .sub-header {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .description {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            text-align: justify;
+            width: 100%;
+        }
+        .input-output-container {
+            display: flex;
+            flex-basis: calc(100% - 20px);
+            gap: 20px;
+        }
+        .converter-section, .result-section {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .converter-section {
+            flex: 1.5; /* Adjust the size as needed */
+            min-width: 400px; /* Adjust the minimum width as needed */
+        }
+        .result-section {
+            flex: 2; /* Adjust the size as needed */
+            min-width: 600px; /* Adjust the minimum width as needed */
+        }
+        #jsonInput {
+            width: 95%;
+            height: 200px; /* Set the height to 200px */
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #dartClassName {
+            width: 95%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #convertButton {
+            display: block;
+            margin: 10px auto;
+            background-color: #8d6df5; /* Elegant pastel purple */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        #copyButton {
+            margin: 10px auto;
+            background-color: #8d6df5; /* Match the theme color */
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        #copyButton:hover {
+            background-color: #7254b3; /* Darken the color on hover */
+        }
+        pre {
+            width: 95%;
+            height: 400px; /* Adjust the height as needed */
+            overflow: auto;
+            white-space: pre-wrap;
+            background-color: #f7f7f7;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-right: 10px; /* Added margin to the right side */
+        }
+        .benefits-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+        .benefit-column {
+            flex-basis: 30%;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .benefit-header {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        .benefit-icon {
+            margin-right: 10px;
+            font-size: 24px;
+            color: #007bff;
+        }
+        .benefit-text {
+            font-size: 16px;
+            color: #555;
+            margin-top: 10px;
+        }
+        footer {
+            background-color: #f4f4f4;
+            padding: 20px 0;
+        }
+        .footbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .privacy-policy {
+            font-size: 14px;
+            color: #555;
+        }
+        .privacy-policy a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .copy-right {
+            font-size: 14px;
+            color: #555;
+        }
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none;
+        }
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #333;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>JSON to Dart Converter</h1>
+        <div class="navbar">
+            <a href="#">JSON to Dart</a>
+            <a href="#">App Localizator</a>
+        </div>
+    </header>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+    <div class="container">
+        <div class="content-container">
+            <div class="description-container">
+                <div class="sub-header">Online JSON To Dart Converter</div>
+                <div class="description">
+                    Effortlessly convert JSON to Dart classes with our online JSON to Dart Converter. Generate Dart code from JSON objects for your Flutter projects. Easily create structured and organized Dart classes from your JSON data.
+                </div>
+            </div>
+            <div class="input-output-container">
+                <section class="converter-section">
+                    <h2>Convert JSON to Dart</h2>
+                    <textarea id="jsonInput" placeholder="Paste your JSON here"></textarea>
+                    <input type="text" id="dartClassName" placeholder="Your Dart class name">
+                    <button id="convertButton">Generate Dart Classes</button>
+                </section>
+                <section class="result-section">
+                    <h2>Dart Classes</h2>
+                    <pre id="dartClasses"></pre>
+                    <button id="copyButton">Copy Dart Code</button>
+                </section>
+            </div>
+        </div>
+        <hr>
+        <div class="benefits-container">
+            <div class="benefit-column">
+                <h3 class="benefit-header"><i class="far fa-check-circle benefit-icon"></i> Easy to Use</h3>
+                <p class="benefit-text">Our JSON to Dart converter provides a simple and intuitive interface, making it easy to generate Dart classes from JSON data.</p>
+            </div>
+            <div class="benefit-column">
+                <h3 class="benefit-header"><i class="far fa-clock benefit-icon"></i> Save Time</h3>
+                <p class="benefit-text">Converting JSON to Dart classes manually can be time-consuming. Our tool automates the process, saving you valuable development time.</p>
+            </div>
+            <div class="benefit-column">
+                <h3 class="benefit-header"><i class="fas fa-bug benefit-icon"></i> Error-Free</h3>
+                <p class="benefit-text">Human errors can lead to typos and inconsistencies when writing Dart classes. Our converter ensures accurate and error-free code generation.</p>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="footbar">
+            <div class="privacy-policy">
+                <a href="/privacy-policy">Privacy Policy</a>
+            </div>
+            <div class="copy-right">
+                &copy; 2023 Your Company. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const jsonInput = document.getElementById('jsonInput');
+            const dartClassName = document.getElementById('dartClassName');
+            const convertButton = document.getElementById('convertButton');
+            const dartClasses = document.getElementById('dartClasses');
+            const copyButton = document.getElementById('copyButton');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+
+            convertButton.addEventListener('click', async () => {
+                loadingOverlay.style.display = 'flex';
+
+                const json = JSON.parse(jsonInput.value);
+                const className = dartClassName.value == '' ? 'AutoGeneratedClass' : dartClassName.value;
+
+                const dartCode = generateDartClass(className,json);
+                dartClasses.textContent = dartCode;
+                    copyButton.style.display = 'block'; // Show the copy button
+                    loadingOverlay.style.display = 'none';
+/*
+                try {
+                    const json = JSON.parse(jsonInput.value);
+                    const className = dartClassName.value;
+                    const dartCode = await generateDartClasses(json, className);
+                    dartClasses.textContent = dartCode;
+                    copyButton.style.display = 'block'; // Show the copy button
+                    loadingOverlay.style.display = 'none';
+
+                } catch (error) {
+                    loadingOverlay.style.display = 'none';
+
+                    dartClasses.textContent = 'Error: Invalid JSON';
+                    copyButton.style.display = 'none'; // Hide the copy button
+                }*/
+
+
+
+
+            });
+
+            copyButton.addEventListener('click', () => {
+                const range = document.createRange();
+                range.selectNode(dartClasses);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+                document.execCommand('copy');
+                window.getSelection().removeAllRanges();
+            });
+
+
+            function generateDartClass(className, jsonObject) {
+  let dartClass = `class ${className} {\n`;
+
+  for (const key in jsonObject) {
+    const value = jsonObject[key];
+
+    if (typeof value === 'string') {
+      dartClass += `  String? ${key};\n`;
+    } else if (typeof value === 'number') {
+      dartClass += `  double? ${key};\n`;
+    } else if (typeof value === 'boolean') {
+      dartClass += `  bool? ${key};\n`;
+    } else if (Array.isArray(value)) {
+      dartClass += `  List<${generateTypeName(value)}?>? ${key};\n`;
+    } else if (typeof value === 'object') {
+      dartClass += `  ${key[0].toUpperCase() + key.slice(1)}? ${key};\n`;
+    }
+  }
+
+  dartClass += `
+  ${className}.fromJson(Map<String, dynamic> json) {
+`;
+
+  for (const key in jsonObject) {
+    dartClass += `    ${key} = json['${key}'] as ${generateTypeName([jsonObject[key]])};\n`;
+  }
+
+  dartClass += '  }\n\n';
+
+  dartClass += `
+  Map<String, dynamic> toJson() {
+    return {
+`;
+
+  for (const key in jsonObject) {
+    dartClass += `      '${key}': ${key},\n`;
+  }
+
+  dartClass += '    };\n  }\n';
+
+  dartClass += '}';
+
+  return dartClass;
+}
+
+function generateTypeName(array) {
+  if (array.length === 0) {
+    return 'dynamic';
+  }
+
+  const types = new Set();
+
+  for (const item of array) {
+    const type = typeof item;
+
+    if (type === 'string') {
+      types.add('String');
+    } else if (type === 'number') {
+      types.add('double');
+    } else if (type === 'boolean') {
+      types.add('bool');
+    } else if (Array.isArray(item)) {
+      types.add('List<${generateTypeName(item)}>'); // Note the use of backticks here
+    } else if (type === 'object') {
+      types.add('${item[0].toUpperCase() + item.slice(1)}');
+    }
+  }
+
+  return types.size === 1 ? types.values().next().value : 'dynamic';
+}
+
+
+
+            
+            async function _generateDartClasses(json, className) {
+               // const apiUrl = 'https://api.creatorium.org/bardly/ai/ask';
+                const apiUrl = 'http:///192.168.1.11:8060/ai/ask';
+                const apiKey = 'NjdJVTlFUVlUTkgxWElKSkpWNVpVVEo1Q1hUN0pPSlRaSUhGVzVHN01YU0lPWlBMQk5OTjlHUEtCSDhLQk5YTkc3UUlQWEZSNEJXWEgzRjJZT0xRV1RZV1JLRFE4WDNHRjlBVFJPWk5EMkxPVVM2VFhQNksxUkJCQjFISDJLTU4=';
+
+                const requestOptions = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-KEY': apiKey,
+                        'X-Device-Platform': 'android',
+                        'X-App-Version': '1.0.0',
+                        'X-App-Build-Number': '1',
+                        'X-App-Package-Name': 'com.example.bardly_mobile_app',
+
+                    },
+                    body: JSON.stringify({ question: jsonInput.value }),
+                };
+
+                try {
+                    const response = await fetch(apiUrl, requestOptions);
+                    const result = await response.json();
+                    return result.data.chosenAnswer;
+                } catch (error) {
+                    return 'Error generating Dart classes';
+                }
+            }
+
+        });
+    </script>
+</body>
+</html>
